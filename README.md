@@ -7,11 +7,48 @@
 
 Give your agent a decision gate it can call before it acts — and an audit record compliance can actually read (NIST AI RMF, EU AI Act Annex IV).
 
-- 10 tools: full evaluations, quick risk checks, scoring guides, decision history, audit-chain verification.
+- **Works immediately, no signup**: the local server runs in sandbox mode (10 evaluations/day).
+- 6 local tools (evaluations, risk checks, health, decision history, usage) — 10 on the hosted server.
 - Hosted server with hash-chained audit trails — [free Community tier](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp) (100 evaluations/month, no credit card).
 - Want to see it before connecting? [Try the Advisor in your browser](https://aegis.undercurrentholdings.com/advisor) — no install, no signup.
 
-## Quickstart
+## Quickstart (local, no account needed)
+
+```bash
+pip install "aegis-governance[mcp]"
+```
+
+**Claude Code**
+
+```bash
+claude mcp add aegis -- aegis-mcp-server
+```
+
+**Cursor** (`.cursor/mcp.json`) / **Windsurf** / any stdio MCP client:
+
+```json
+{
+  "mcpServers": {
+    "aegis": { "command": "aegis-mcp-server" }
+  }
+}
+```
+
+**VS Code** (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "aegis": { "type": "stdio", "command": "aegis-mcp-server" }
+  }
+}
+```
+
+Runs in sandbox mode out of the box. Set `AEGIS_API_KEY` in the server's
+environment ([free key](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp))
+to unlock decision history, usage reports, and risk checks. Requires Python >= 3.10.
+
+## Hosted server (streamable-http, full 10-tool surface)
 
 Get a free API key at [portal.undercurrentholdings.com](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp) (GitHub/Google sign-in, key provisioned automatically), then:
 
@@ -73,7 +110,7 @@ decision = Aegis().evaluate(
 print(decision.status)  # "proceed"
 ```
 
-> A local stdio MCP server (`aegis-mcp-server`) is shipping in an upcoming `aegis-governance` release — watch this repo.
+> The local stdio MCP server above ships in `aegis-governance` >= 1.3.0 via the `[mcp]` extra.
 
 ## Tools
 

@@ -6,8 +6,28 @@
     "url": "https://github.com/undercurrentai/aegis-mcp",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "1.3.0",
   "websiteUrl": "https://aegis.undercurrentholdings.com",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "aegis-governance",
+      "version": "1.3.0",
+      "runtimeHint": "aegis-mcp-server",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "AEGIS_API_KEY",
+          "description": "Optional — omit for sandbox mode (10 evaluations/day). Free Community key (100/month) at https://portal.undercurrentholdings.com",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",
