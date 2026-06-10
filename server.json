@@ -7,21 +7,17 @@
     "source": "github"
   },
   "version": "1.0.0",
-  "packages": [
+  "websiteUrl": "https://aegis.undercurrentholdings.com",
+  "remotes": [
     {
-      "registryType": "npm",
-      "identifier": "@undercurrentai/aegis-mcp",
-      "version": "1.0.0",
-      "transport": {
-        "type": "stdio"
-      },
-      "environmentVariables": [
+      "type": "streamable-http",
+      "url": "https://mcp.aegis.undercurrentholdings.com/mcp",
+      "headers": [
         {
-          "description": "Your API key for the service",
+          "name": "Authorization",
+          "description": "Bearer YOUR_API_KEY — free key from https://portal.undercurrentholdings.com (Community tier, 100 evaluations/month)",
           "isRequired": true,
-          "format": "string",
-          "isSecret": true,
-          "name": "YOUR_API_KEY"
+          "isSecret": true
         }
       ]
     }

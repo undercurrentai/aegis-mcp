@@ -7,55 +7,22 @@
 
 Give your agent a decision gate it can call before it acts — and an audit record compliance can actually read (NIST AI RMF, EU AI Act Annex IV).
 
-- **Works immediately. No signup.** The local server evaluates in-process.
 - 10 tools: full evaluations, quick risk checks, scoring guides, decision history, audit-chain verification.
-- Hosted option with team-shared audit trails on the [free Community tier](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp) (100 evaluations/month).
+- Hosted server with hash-chained audit trails — [free Community tier](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp) (100 evaluations/month, no credit card).
+- Want to see it before connecting? [Try the Advisor in your browser](https://aegis.undercurrentholdings.com/advisor) — no install, no signup.
 
-## Quickstart (local, no account needed)
+## Quickstart
 
-```bash
-pip install aegis-governance
-```
+Get a free API key at [portal.undercurrentholdings.com](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp) (GitHub/Google sign-in, key provisioned automatically), then:
 
 **Claude Code**
-
-```bash
-claude mcp add aegis -- aegis-mcp-server
-```
-
-**Cursor** (`.cursor/mcp.json`) / **Windsurf** / any stdio MCP client:
-
-```json
-{
-  "mcpServers": {
-    "aegis": {
-      "command": "aegis-mcp-server"
-    }
-  }
-}
-```
-
-**VS Code** (`.vscode/mcp.json`):
-
-```json
-{
-  "servers": {
-    "aegis": {
-      "type": "stdio",
-      "command": "aegis-mcp-server"
-    }
-  }
-}
-```
-
-## Hosted server (shared audit trail, team usage)
-
-Get a free API key at [portal.undercurrentholdings.com](https://portal.undercurrentholdings.com/signup?product=aegis&utm_source=github&utm_medium=aegis-mcp), then:
 
 ```bash
 claude mcp add --transport streamable-http aegis https://mcp.aegis.undercurrentholdings.com/mcp \
   --header "Authorization: Bearer YOUR_API_KEY"
 ```
+
+**Cursor** (`.cursor/mcp.json`) / **Windsurf** / any streamable-http MCP client:
 
 ```json
 {
@@ -70,6 +37,43 @@ claude mcp add --transport streamable-http aegis https://mcp.aegis.undercurrenth
   }
 }
 ```
+
+**VS Code** (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "aegis": {
+      "type": "http",
+      "url": "https://mcp.aegis.undercurrentholdings.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+## Prefer a local SDK instead of MCP?
+
+The Python SDK has a sandbox mode that works with no account at all (10 evaluations/day):
+
+```bash
+pip install aegis-governance
+```
+
+```python
+from aegis import Aegis
+
+decision = Aegis().evaluate(
+    proposal_summary="Add Redis caching layer to reduce API latency",
+    risk_baseline=0.02, risk_proposed=0.05,
+    novelty_score=0.75, complexity_score=0.8, quality_score=0.9,
+)
+print(decision.status)  # "proceed"
+```
+
+> A local stdio MCP server (`aegis-mcp-server`) is shipping in an upcoming `aegis-governance` release — watch this repo.
 
 ## Tools
 
