@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.undercurrentholdings/aegis",
+  "description": "Six-gate quantitative governance for AI agents: risk, profit, novelty, complexity, quality, and utility gates return PROCEED/PAUSE/HALT/ESCALATE decisions with hash-chained audit trails and NIST AI RMF / EU AI Act artifacts.",
+  "repository": {
+    "url": "https://github.com/undercurrentai/aegis-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@undercurrentai/aegis-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Your API key for the service",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "YOUR_API_KEY"
+        }
+      ]
+    }
+  ]
+}
