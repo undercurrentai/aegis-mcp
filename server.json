@@ -1,32 +1,18 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.undercurrentholdings/aegis",
-  "description": "Six-gate governance for AI agents: PROCEED/PAUSE/HALT decisions with hash-chained audit trails.",
+  "description": "Local stdio MCP server for the AEGIS governance client. The hosted evaluation service is offline.",
   "repository": {
     "url": "https://github.com/undercurrentai/aegis-mcp",
     "source": "github"
   },
-  "version": "1.3.1",
+  "version": "1.4.2",
   "websiteUrl": "https://aegis.undercurrentholdings.com",
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://mcp.aegis.undercurrentholdings.com/mcp",
-      "headers": [
-        {
-          "name": "Authorization",
-          "description": "Bearer YOUR_API_KEY \u2014 free key from https://portal.undercurrentholdings.com (Community tier, 100 evaluations/month)",
-          "isRequired": true,
-          "isSecret": true
-        }
-      ]
-    }
-  ],
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "aegis-governance",
-      "version": "1.3.1",
+      "version": "1.4.2",
       "runtimeHint": "aegis-mcp-server",
       "transport": {
         "type": "stdio"
@@ -34,7 +20,7 @@
       "environmentVariables": [
         {
           "name": "AEGIS_API_KEY",
-          "description": "Optional - omit for sandbox mode (10 evaluations/day). Free key at https://portal.undercurrentholdings.com",
+          "description": "API key for the hosted AEGIS API. The hosted service is offline, so tool calls do not return evaluations. See https://undercurrentholdings.com/status/",
           "isRequired": false,
           "isSecret": true,
           "format": "string"
